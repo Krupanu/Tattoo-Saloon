@@ -19,6 +19,9 @@ public class History {
 
     private String event;
 
+    @Column(nullable = false)
+    private boolean status;
+
     @ManyToOne
     @JoinColumn(name = "master_id")
     private User master;
