@@ -1,10 +1,6 @@
 package com.example.tattoosalon.dto;
 
 
-import com.example.tattoosalon.model.ContactDetail;
-import com.example.tattoosalon.model.History;
-import com.example.tattoosalon.model.Role;
-import com.example.tattoosalon.model.TotalRoles;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;

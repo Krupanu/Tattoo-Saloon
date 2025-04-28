@@ -1,6 +1,6 @@
 package com.example.tattoosalon.service;
 
-import com.example.tattoosalon.dto.SingIn;
+import com.example.tattoosalon.dto.SignIn;
 import com.example.tattoosalon.dto.UserDto;
 import com.example.tattoosalon.model.User;
 
@@ -15,5 +15,5 @@ public interface UserService {
 
     UserDto CreateUser(UserDto userDto);
 
-    SingIn SingIn(SingIn singIn);
+    SignIn SingIn(SignIn singIn);
 }

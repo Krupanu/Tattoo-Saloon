@@ -1,12 +1,11 @@
 package com.example.tattoosalon.service.serviceImpl;
 
 import com.example.tattoosalon.config.JwtService;
-import com.example.tattoosalon.dto.SingIn;
+import com.example.tattoosalon.dto.SignIn;
 import com.example.tattoosalon.dto.UserDto;
 import com.example.tattoosalon.model.*;
 import com.example.tattoosalon.repository.UserRepository;
 import com.example.tattoosalon.service.UserService;
-import jakarta.validation.constraints.Null;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,18 +38,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
-//    @Override
-//    public void saveUser(UserDto userDto) {
-//        User user = new User();
-//        user.setFirstName(userDto.getFirstName());
-//        user.setLastName(userDto.getLastName());
-//        user.setEmail(userDto.getEmail());
-//        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-//        user.setRole(userDto.getRole());
-//
-//        userRepository.save(user);
-//    }
 
     @Override
     public User findByEmail(String email) {
@@ -85,7 +72,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SingIn SingIn(SingIn singIn) {
+    public SignIn SingIn(SignIn singIn) {
         this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(singIn.getEmail(),singIn.getPassword()));
         User user=this.userRepository.findByEmail(singIn.getEmail());
         var jwtToken=jwtService.generateToken(user);

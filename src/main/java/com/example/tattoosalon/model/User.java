@@ -37,16 +37,17 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = false)
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Role> role;
+    private Double phoneNumber;
+
 
     //Releationships
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private ContactDetail contactDetail;
+    @Column(nullable = false)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Role> role;
 
     @OneToMany(mappedBy = "client")
-    private List<History> history;
+    private List<HistoryAndApplication> history;
 
     //Methods
 
