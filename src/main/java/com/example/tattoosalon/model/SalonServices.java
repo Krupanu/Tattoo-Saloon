@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Role {
+public class SalonServices {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String role;
+    private String serviceName;
 
-    public Role(String role) {
-        this.role = role;
+    public SalonServices(String serviceName) {
+        this.serviceName = serviceName;
     }
 }

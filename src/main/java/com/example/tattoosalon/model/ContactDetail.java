@@ -19,9 +19,6 @@ public class ContactDetail {
     private Long id;
 
     @Column(nullable = false)
-    private Double phoneNumber;
-
-    @Column()
     private String email;
 
     @OneToOne

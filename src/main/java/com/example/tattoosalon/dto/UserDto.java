@@ -1,17 +1,19 @@
 package com.example.tattoosalon.dto;
 
 
+import com.example.tattoosalon.model.ContactDetail;
+import com.example.tattoosalon.model.History;
 import com.example.tattoosalon.model.Role;
+import com.example.tattoosalon.model.TotalRoles;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Getter
 @Setter
+@Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto
@@ -26,5 +28,9 @@ public class UserDto
     private String email;
     @NotEmpty(message = "Password should not be empty")
     private String password;
-    private Role role;
+    private String role;
+
+//    private ContactDetail contactDetail;
+//
+//    private History history;
 }
