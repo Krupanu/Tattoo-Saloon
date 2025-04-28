@@ -40,22 +40,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    @Override
-    public List<User> findAllUsers() {
-        return userRepository.findAll();
-    }
-
-
-    @Override
     public UserDto CreateUser(UserDto userDto) {
         User user = this.modelMapper.map(userDto, User.class);
-        List<Role> list= new ArrayList<>();
-        list.add(new Role(TotalRoles.CLIENT.name()));
-        user.setRole(list);
+        user.setRole(userDto.getRole());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         this.userRepository.save(user);
         return this.modelMapper.map(user,UserDto.class);

@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,21 +44,16 @@ public class User implements UserDetails {
     //Releationships
 
     @Column(nullable = false)
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Role> role;
-
-    @OneToMany(mappedBy = "client")
-    private List<HistoryAndApplication> history;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     //Methods
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = role.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.getRole()))
-                .collect(Collectors.toList());
-        return authorities;
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
+
 
     @Override
     public String getPassword() {

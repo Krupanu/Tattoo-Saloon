@@ -1,23 +1,32 @@
 package com.example.tattoosalon.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Getter;
 
-@Entity
-@Data
-@NoArgsConstructor
-public class Role {
+@Getter
+public enum Role {
+    ADMIN("ADMIN"),
+    MASTER("MASTER"),
+    CLIENT("CLIENT");
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String role;
+    private final String value;
 
-    public Role(String role) {
-        this.role = role;
+    Role(final String value) {
+        this.value = value;
+    }
+
+    @JsonCreator
+    public static Role fromValue(String value) {
+        for (Role role : Role.values()) {
+            if (role.value.equalsIgnoreCase(value.trim())) {
+                return role;
+            }
+        }
+        throw new IllegalArgumentException("Unknown value: " + value);
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }
