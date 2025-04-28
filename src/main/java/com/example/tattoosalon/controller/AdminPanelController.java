@@ -1,12 +1,14 @@
 package com.example.tattoosalon.controller;
 
+import com.example.tattoosalon.dto.AppointmentDto;
 import com.example.tattoosalon.dto.UserDto;
 import com.example.tattoosalon.model.User;
+import com.example.tattoosalon.service.serviceImpl.HistoryAndApplicationServiceImpl;
 import com.example.tattoosalon.service.serviceImpl.UserServiceImpl;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,13 +16,17 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminPanelController {
     UserServiceImpl userService;
+    HistoryAndApplicationServiceImpl historyAndApplicationService;
 
-    public AdminPanelController(UserServiceImpl userService) {
+    public AdminPanelController(UserServiceImpl userService,
+                                HistoryAndApplicationServiceImpl historyAndApplicationService) {
         this.userService = userService;
+        this.historyAndApplicationService = historyAndApplicationService;
     }
 
-    @GetMapping("/getAllCustomers")
-    public List<User> getAllCustomers() {
-        return userService.findAllUsers();
+    @PostMapping("/cancelAppointment/{appointmentId}")
+    public ResponseEntity<String> cancelAppointment(@PathVariable("appointmentId") Long appointmentId) {
+        historyAndApplicationService.CancelAppointment(appointmentId);
+        return new ResponseEntity<>("appointment has been canceled", HttpStatusCode.valueOf(200));
     }
 }

@@ -40,39 +40,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    @Override
-    public List<User> findAllUsers() {
-        return userRepository.findAll();
-    }
-
-
-    @Override
     public UserDto CreateUser(UserDto userDto) {
         User user = this.modelMapper.map(userDto, User.class);
-        List<Role> list= new ArrayList<>();
-        list.add(new Role(TotalRoles.CLIENT.name()));
-        user.setRole(list);
+        user.setRole(userDto.getRole());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-//        ContactDetail contactDetail = new ContactDetail();
-//        contactDetail.setEmail(user.getEmail());
-//        contactDetail.setPhoneNumber(user.getContactDetail().getPhoneNumber());
-//        contactDetail.setUser(user);
-//        user.setContactDetail(contactDetail);
-
-//        List<History> history = new ArrayList<>();
-//        user.setHistory(history);
-
         this.userRepository.save(user);
         return this.modelMapper.map(user,UserDto.class);
     }
 
     @Override
-    public SignIn SingIn(SignIn singIn) {
+    public SignIn SignIn(SignIn singIn) {
         this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(singIn.getEmail(),singIn.getPassword()));
         User user=this.userRepository.findByEmail(singIn.getEmail());
         var jwtToken=jwtService.generateToken(user);
