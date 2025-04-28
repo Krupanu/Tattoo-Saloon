@@ -37,7 +37,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = false)
-    private Double phoneNumber;
+    private String phoneNumber;
 
 
     //Releationships
