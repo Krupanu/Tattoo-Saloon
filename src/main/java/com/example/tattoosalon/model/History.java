@@ -20,7 +20,7 @@ public class History {
     private String event;
 
     @Column(nullable = false)
-    private boolean status;
+    private bo status;
 
     @ManyToOne
     @JoinColumn(name = "master_id")
