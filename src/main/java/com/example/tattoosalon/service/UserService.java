@@ -15,5 +15,5 @@ public interface UserService {
 
     UserDto CreateUser(UserDto userDto);
 
-    SignIn SingIn(SignIn singIn);
+    SignIn SignIn(SignIn singIn);
 }

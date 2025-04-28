@@ -19,7 +19,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/singup")
+    @PostMapping("/signup")
     public ResponseEntity<UserDto> CreateUser(@RequestBody UserDto userDto){
 
         UserDto userDto1 = this.userService.CreateUser(userDto);
@@ -28,10 +28,10 @@ public class AuthController {
     }
 
 
-    @PostMapping("/singin")
-    public ResponseEntity<SignIn> CreateUser(@RequestBody SignIn singIn){
+    @PostMapping("/signin")
+    public ResponseEntity<SignIn> CreateUser(@RequestBody SignIn signIn){
 
-        SignIn singIn1 = this.userService.SingIn(singIn);
-        return new ResponseEntity<>(singIn1, HttpStatusCode.valueOf(200));
+        SignIn singIn = this.userService.SignIn(signIn);
+        return new ResponseEntity<>(singIn, HttpStatusCode.valueOf(200));
     }
 }

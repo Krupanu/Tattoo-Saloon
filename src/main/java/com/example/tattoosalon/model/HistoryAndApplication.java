@@ -17,7 +17,9 @@ public class HistoryAndApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String event;
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private SalonServices event;
 
     @ManyToOne
     @JoinColumn(name = "master_id")
