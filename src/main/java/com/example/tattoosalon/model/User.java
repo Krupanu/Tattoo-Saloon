@@ -40,9 +40,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String phoneNumber;
 
-
-    //Releationships
-
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;

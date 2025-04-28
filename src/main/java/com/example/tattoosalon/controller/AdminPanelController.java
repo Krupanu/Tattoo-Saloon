@@ -24,9 +24,4 @@ public class AdminPanelController {
         this.historyAndApplicationService = historyAndApplicationService;
     }
 
-    @PostMapping("/cancelAppointment/{appointmentId}")
-    public ResponseEntity<String> cancelAppointment(@PathVariable("appointmentId") Long appointmentId) {
-        historyAndApplicationService.CancelAppointment(appointmentId);
-        return new ResponseEntity<>("appointment has been canceled", HttpStatusCode.valueOf(200));
-    }
 }
