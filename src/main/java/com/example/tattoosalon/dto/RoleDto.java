@@ -1,6 +1,6 @@
 package com.example.tattoosalon.dto;
 
-import com.example.tattoosalon.model.Role;
+import com.example.tattoosalon.model.TotalRoles;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleDto {
-    private Role value;
+    private TotalRoles value;
 
     private String title;
 }
