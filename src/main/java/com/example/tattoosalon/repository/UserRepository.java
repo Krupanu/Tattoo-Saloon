@@ -1,5 +1,6 @@
 package com.example.tattoosalon.repository;
 
+import com.example.tattoosalon.dto.UserDto;
 import com.example.tattoosalon.model.Role;
 import com.example.tattoosalon.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User getUsersByIdAndRole(Long id, Role role);
 
+    User getUsersByRole(Role role);
 }
 
 

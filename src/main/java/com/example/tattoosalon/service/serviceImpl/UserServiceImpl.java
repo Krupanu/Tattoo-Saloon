@@ -13,8 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -55,5 +55,40 @@ public class UserServiceImpl implements UserService {
         var jwtToken=jwtService.generateToken(user);
         singIn.setJwt(jwtToken);
         return singIn;
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        return convertToDtoList(userRepository.findAll());
+    }
+
+    public List<UserDto> convertToDtoList(List<User> users) {
+        return users.stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
+    }
+
+
+    public List<UserDto> convertToDtoListForMaster(List<User> users) {
+        return users.stream()
+                .filter(user -> user.getRole().equals(Role.MASTER))
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<UserDto> convertToDtoListForClient(List<User> users) {
+        return users.stream()
+                .filter(user -> user.getRole().equals(Role.CLIENT))
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
+    }
+    @Override
+    public List<UserDto> getAllMasters() {
+        return convertToDtoListForMaster(userRepository.findAll());
+    }
+
+    @Override
+    public List<UserDto> getAllClients() {
+        return convertToDtoListForClient(userRepository.findAll());
     }
 }

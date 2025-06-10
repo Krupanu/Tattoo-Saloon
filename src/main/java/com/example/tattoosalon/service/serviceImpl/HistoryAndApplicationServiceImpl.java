@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HistoryAndApplicationServiceImpl implements HistoryAndApplicationService {
 
@@ -53,6 +55,12 @@ public class HistoryAndApplicationServiceImpl implements HistoryAndApplicationSe
         appointment.setServiceStatus(ServiceStatus.CANCELLED);
         historyAndApplicationRepository.save(appointment);
         return modelMapper.map(appointment, AppointmentDto.class);
+
+    }
+
+    @Override
+    public List<HistoryAndApplication> getSchedule() {
+        return historyAndApplicationRepository.findAll();
     }
 
 
